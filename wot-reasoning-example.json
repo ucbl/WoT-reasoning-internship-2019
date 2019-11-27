@@ -1,0 +1,45 @@
+[
+    {
+        "id": "4dadca7.a1c9034",
+        "type": "tab",
+        "label": "Main",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "4426e2fb.525184",
+        "type": "temperature",
+        "z": "4dadca7.a1c9034",
+        "propertyType": "",
+        "minValue": "0",
+        "maxValue": "1000",
+        "unitCode": "iot:Kelvin",
+        "observable": "true",
+        "name": "KelvinTemperatureDevice",
+        "iptype": "iot:Temperature",
+        "capability": "iot:TemperatureSensor",
+        "foitype": "iot:Room",
+        "foi": "Room1",
+        "operation": "create",
+        "x": 250,
+        "y": 160,
+        "wires": [
+            [
+                "eb79eafb.acfe6"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "eb79eafb.acfe6",
+        "type": "ThingDescriptionGenerator",
+        "z": "4dadca7.a1c9034",
+        "name": "TD Generator",
+        "uri": "coap://localhost:5683",
+        "x": 540,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    }
+]
