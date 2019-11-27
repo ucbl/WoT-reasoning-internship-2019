@@ -57,7 +57,7 @@ GraphDB Web interface will be accessible at `http://localhost:7200`
 
 ## Using the example
 
-Basically, based on the definitions of a `KelvinTemperatureDevice` and a `kelvin_to_celsius` converter, this example infers a `CelsiusTemperatureDevice` which is queriable in SPARQL.
+Based on the definitions of a `KelvinTemperatureDevice` and a `kelvin_to_celsius` converter, this example infers a `CelsiusTemperatureDevice` which is queriable in SPARQL.
 
 ### node-red side
 
