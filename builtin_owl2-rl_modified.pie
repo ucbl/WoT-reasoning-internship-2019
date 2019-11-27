@@ -1441,7 +1441,8 @@ Id: kelvin_to_celsius
 */
 
 /*
-  Enhanced
+  Enhanced:
+  New device definition
 */
 Id: kelvin_to_celsius
     x <custom:producesKelvinTempObservationResult> a
