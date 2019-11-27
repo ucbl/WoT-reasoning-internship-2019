@@ -578,17 +578,6 @@ Axioms
   <xsd:dateTime>             <rdf:type> <rdfs:Datatype>
   <xsd:dateTimeStamp>        <rdf:type> <rdfs:Datatype>
 
-
-  // ========================================================================
-  // Custom axioms
-  // ========================================================================
-
-  <custom:producesKelvinTempObservationResult>  <rdfs:range>  <custom:KelvinTemp>
-  <custom:producesCelsiusTempObservationResult> <rdfs:range>  <custom:CelsiusTemp>
-  <custom:convertsKtoC>                         <rdfs:domain> <custom:KelvinTemp>
-  <custom:convertsKtoC>                         <rdfs:range>  <custom:CelsiusTemp>
-}
-
 Rules
 {
 // ========================================================================
@@ -1404,28 +1393,27 @@ Id: scm_uni_2
  
 }
 
+  // ========================================================================
+  // Custom axioms and reasoning rules for the temperature sensor example
+  // Still need to be generalized
+  // ========================================================================
+
 /*
- Specific reasoning rules for the temperature sensor example
- Still need to be generalized
+ Axioms
+*/
+  <custom:producesKelvinTempObservationResult>  <rdfs:range>  <custom:KelvinTemp>
+  <custom:producesCelsiusTempObservationResult> <rdfs:range>  <custom:CelsiusTemp>
+  <custom:convertsKtoC>                         <rdfs:domain> <custom:KelvinTemp>
+  <custom:convertsKtoC>                         <rdfs:range>  <custom:CelsiusTemp>
+}
+
+/*
+ Rules
 */
 
-/* 
-Id: producesKelvinTemp
-    x <rdf:type> <iot:KelvinTemperatureSensor>
-    x <schema:unitCode> y
-    ----------------------------
-    x <custom:producesKelvinTempObservationResult> y
-
-Id: producesCelsiusTemp
-    x <rdf:type> <iot:CelsiusTemperatureSensor>
-    ----------------------------
-    x <custom:producesCelsiusTempObservationResult> y
-*/
-
-/* ================================================ */
 /*
-  Define what is a KelvinTemperatureSensor
-  for the tests : its something that has a unit code
+  Define what a KelvinTemperatureSensor is:
+  something that has a unit code
   but this is TEMPORARY
 */
 
@@ -1444,7 +1432,7 @@ Id: isCelsiusTemperatureSensor
 /*
 Base Rule : 
 
-Id: kelvin_to_celcius
+Id: kelvin_to_celsius
     x <custom:producesKelvinTempObservationResult> y
     y <custom:convertsKtoC> z
     -------------------------------
@@ -1455,7 +1443,7 @@ Id: kelvin_to_celcius
 /*
   Enhanced
 */
-Id: kelvin_to_celcius
+Id: kelvin_to_celsius
     x <custom:producesKelvinTempObservationResult> a
     x <iot:capability> c
     y <custom:convertsKtoC> z
@@ -1465,7 +1453,7 @@ Id: kelvin_to_celcius
     new <custom:producesCelsiusTempObservationResult> z
     new <iot:capability> c
 
-Id: celcius_to_kelvin
+Id: celsius_to_kelvin
     x <custom:producesCelsiusTempObservationResult> a
     x <iot:capability> c
     y <custom:convertsCtoK> z

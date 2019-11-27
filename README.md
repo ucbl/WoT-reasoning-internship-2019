@@ -1,6 +1,6 @@
 # WoT Reasoning
 
-The aim of this project was to add reasoning capabilities to [Web of Things](https://www.w3.org/WoT/) repositories and platforms. Currently, it can infer properties so as to discover devices that have not been formally declared in a WoT Runtime, thanks to *ad hoc* reasoning rules.
+The aim of this project was to demonstrate how to add reasoning capabilities to [Web of Things](https://www.w3.org/WoT/) application platforms. Currently, it can infer properties so as to discover devices that have not been formally declared in a WoT Runtime, thanks to *ad hoc* reasoning rules.
 
 This project is based on the following technologies:
 
@@ -17,7 +17,7 @@ This project is based on the following technologies:
 
 ### GraphDB  
 
-- Installation (8.10.1 recommended): `https://www.ontotext.com/products/graphdb/graphdb-free/`
+- Installation (8.10.1 recommended; requires Java 8): `https://www.ontotext.com/products/graphdb/graphdb-free/`
 - Launching:
   1. `cd graphdb-free-8.10.1/bin`
   2. `./graphdb -d`
@@ -47,10 +47,17 @@ GraphDB Web interface will be accessible at `http://localhost:7200`
 
 ## Repository contents
 
-- `builtin_owl2-rl_modified.pie` is the **ruleset** to add when in a new repository in GraphDB. It contains both OWL2RL semantics and some specific inference rules (at the end of the file) defining property chains to be used with the example below.
-- `wot-reasoning-example.json` is a basic example of device descriptions (to add in node-red) that will allow producing inferences.
+- `wot-reasoning-example.json` is a basic example of device description (to add in node-red) that contains the definition of a `KelvinTemperatureDevice`.
+- `builtin_owl2-rl_modified.pie` is the ruleset to add when creating a new RDF repository in GraphDB. It contains:
+  - the definition of OWL2RL semantics,
+  - the definition, as a set of rules, of a second device: `kelvin_to_celsius`, which performs temperature unit conversion.
+  - some specific inference rules (at the end of the file) defining a property chain to be used with the example below,
+
+**Note**: it is of course possible to define the `kelvin_to_celsius` convertor in the TD json file instead of the GraphDB ruleset.
 
 ## Using the example
+
+Basically, based on the definitions of a `KelvinTemperatureDevice` and a `kelvin_to_celsius` converter, this example infers a `CelsiusTemperatureDevice` which is queriable in SPARQL.
 
 ### node-red side
 
@@ -70,10 +77,9 @@ SELECT * WHERE {
 }
 ```  
 
-For the tests, within the ruleset there is a device called "KelvinToCelsius".  
-It allows the ruleset to create new nodes as soon as a *KelvinTemperatureSensor* is detected (i.e. a device that produces temperature observation results in Kelvin).
+This query shows that the reasoner has created a *KelvinTemperatureSensor* (i.e. a device that produces temperature observation results in Kelvin).
 
-It is also possible to modify the ruleset to add, in a second time, the required convertor through **node-wot**.
+**Note**: the rule that generates this new device is an *ad hoc* rule. It still needs to be expressed using an OWL property chain axiom to be generalized and more useful.
 
 ## Troubleshooting
 
