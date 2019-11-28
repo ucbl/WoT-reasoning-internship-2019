@@ -87,4 +87,4 @@ This query shows that the reasoner has created a *KelvinTemperatureSensor* (i.e.
 
 ## Credits
 
-This project was realized during a first year master degree internship funded by the computer science department of Université Claude Bernard Lyon 1.
+This project was realized during [Nicolas Condomitti](https://github.com/DanielC-N)'s first year master degree internship and funded by the computer science department of Université Claude Bernard Lyon 1.
